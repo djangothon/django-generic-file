@@ -1,0 +1,53 @@
+<div id="genericfile">Upload</div>
+<input type="hidden" id="genericfile_ids" name="genericfile_ids">
+<script>
+    $(document).ready(function(){
+        $("#genericfile").uploadFile({
+            url: "{% url 'genericfile_upload' %}",
+            method: "POST",
+            //allowedTypes: "jpg,jpeg,png,gif,doc,pdf,zip,html,txt,docx",
+            fileName: "attachment",
+            returnType: "json",
+            showDownload: true,
+            showDelete: true,
+            showProgress: false,
+            showFileCounter: false,
+            multiple:true,
+            dragDrop:true,
+            {% if host_object %}
+            onLoad: function(obj){
+                $.ajax({
+                    cache: false,
+                    url: "{% url 'genericfile_list' content_type.id host_object.id %}",
+                    dataType: "json",
+                    success: function(data)
+                    {
+                        for(var i=0;i<data.length;i++)
+                        {
+                            obj.createProgress(data[i]);
+                        }
+                    }
+                });
+            },
+            {% endif %}
+            formData: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                {% if host_object %}object_id: {{host_object.id}},{% endif %}
+                {% if content_type %}content_type: {{content_type.id}},{% endif %}
+                //extension: ''
+            },
+            onSuccess: function(files,data,xhr) {
+                // Do Something
+                if($("#genericfile_ids").val()) $("#genericfile_ids").val($("#genericfile_ids").val() + ',' + data.id);
+                else $("#genericfile_ids").val(data.id);
+            },
+            deleteCallback: function(file, pd) {
+                $.ajax({
+                    url: file.delete_url,
+                    data: "csrfmiddlewaretoken=" + $('input[name=csrfmiddlewaretoken]').val(),
+                    type: "POST",
+                });
+            }
+        });
+    });
+</script>
