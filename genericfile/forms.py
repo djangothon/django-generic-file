@@ -13,7 +13,9 @@ class FileUploadForm(forms.ModelForm):
         fields = ('attachment', 'content_type', 'object_id', 'extension')
 
     def clean_content_type(self):
-        return ContentType.objects.get(id=self.data['content_type'])
+        content_type_id = self.data.get('content_type')
+        if content_type_id is not None:
+            return ContentType.objects.get(id=content_type_id)
 
     def clean_extension(self):
         extension = self.data.get('extension')

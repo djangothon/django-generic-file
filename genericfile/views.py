@@ -54,7 +54,9 @@ class FileListView(ListView):
 
 @require_POST
 def delete_file(request, pk):
-    FileStore.objects.get(id=pk).delete()
+    f = FileStore.objects.get(id=pk)
+    f.attachment.delete()
+    f.delete()
     return JsonResponse({'status': 'success'})
 
 

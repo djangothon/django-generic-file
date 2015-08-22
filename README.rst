@@ -54,6 +54,21 @@ Then to render your form
 
     </form>
 
+Options for "get_genericfile_form" template tag
+===============================================
+
+    1. **maxFileCount** - to Restrict Number of files
+
+        {% get_genericfile_form maxFileCount=1 %}
+
+        Default is NoLimit
+
+    2. **allowedTypes** - to Restrict File types
+
+        {% get_genericfile_form allowedTypes="jpg,jpeg,png,gif,doc,pdf,zip,html,txt,docx" %}
+
+        Default is AnyFiles
+        
 To get the list of files in Details view
 ========================================
 

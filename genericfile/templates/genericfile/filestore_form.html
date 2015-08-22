@@ -5,13 +5,14 @@
         $("#genericfile").uploadFile({
             url: "{% url 'genericfile_upload' %}",
             method: "POST",
-            //allowedTypes: "jpg,jpeg,png,gif,doc,pdf,zip,html,txt,docx",
+            {% if allowedTypes %}allowedTypes: "{{allowedTypes}}",{% endif %}
             fileName: "attachment",
             returnType: "json",
             showDownload: true,
             showDelete: true,
             showProgress: false,
             showFileCounter: false,
+            {% if maxFileCount %}maxFileCount: {{maxFileCount}},{% endif %}
             multiple:true,
             dragDrop:true,
             {% if host_object %}
