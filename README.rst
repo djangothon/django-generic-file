@@ -1,7 +1,7 @@
 Django Generic File
 ===================
 
-    A Generic File Model for all kind of file attachment with AJAX fileupload and drag & drop feature.
+A Generic File Model for all kind of file attachment with AJAX fileupload and drag & drop feature.
     
 Installation
 ------------
