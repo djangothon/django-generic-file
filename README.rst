@@ -2,7 +2,11 @@ Django Generic File
 ===================
 
 A Generic File Model for all kind of file attachment with AJAX fileupload and drag & drop feature.
-    
+
+- Attach files to any Model across your project
+- Include file upload field in your django templates using our templatetags
+- Retrieve back the list of files attached to your Object using our templatetags
+
 Installation
 ------------
 ::
@@ -26,7 +30,7 @@ Usage
 Then to render your form
 ------------------------
 
-1. In Add Form (where object is not yet created)::
+1. In Your Add Form (basically where object is not yet created / unknown)::
 
     <form action='.' method='post'>
         {% csrf_token %}
@@ -35,7 +39,11 @@ Then to render your form
         <button type='submit' class="btn blue">Submit</button>
     </form>
 
-2. In Edit Form (where object is known)::
+    # then in POST method of your view, 
+    from genericfile.views import update_genericfile
+    update_genericfile(self.request.POST, self.object)
+
+2. In Your Edit Form (where object is known)::
 
     <form action='.' method='post'>
         {% csrf_token %}
