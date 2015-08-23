@@ -27,10 +27,10 @@ Usage
 
     {% load genericfiletags %}
 
-Then to render your form
-------------------------
+To render file field in your form use "get_genericfile_form"
+------------------------------------------------------------
 
-1. In Your Add Form (basically where object is not yet created / unknown)::
+**example 1:** In Your Add Forms (basically where object is not yet created / unknown)::
 
     <form action='.' method='post'>
         {% csrf_token %}
@@ -43,7 +43,7 @@ Then to render your form
     from genericfile.views import update_genericfile
     update_genericfile(self.request.POST, self.object)
 
-2. In Your Edit Form (where object is known)::
+**example 2:** In Your Edit Form (where object is known)::
 
     <form action='.' method='post'>
         {% csrf_token %}
@@ -67,8 +67,8 @@ Options
 
     # Default is AnyFiles
         
-To get the list of files in Details view
-----------------------------------------
+To retrieve the list of files use "get_genericfile_list"
+--------------------------------------------------------
 ::
 
     {% get_genericfile_list host_object=object as attachments %}
@@ -80,11 +80,11 @@ To get the list of files in Details view
       {% endfor %}
     </ul>
 
-Additional Requirements
------------------------
+Additional Note
+---------------
 
 Include if you not have included them already in you html file
 ::
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
