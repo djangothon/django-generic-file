@@ -16,7 +16,7 @@ Installation
 Usage
 -----
 
-1. Add **"genericfile"** to your INSTALLED_APPS.
+1. Add **"genericfile"** to your INSTALLED_APPS and migrate.
 
 2. Include following static files in your template::
 
